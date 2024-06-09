@@ -6,7 +6,8 @@ let upgradeCost = parseInt(localStorage.getItem('upgradeCost')) || 100;
 let upgradeValueCost = parseInt(localStorage.getItem('upgradeValueCost')) || 100;
 let clicks = parseInt(localStorage.getItem('clicks')) || 0;
 let lastClickTime = Date.now();
-let upgradeLevel = parseInt(localStorage.getItem('upgradeLevel')) || 1;
+let upgradeClickLevel = parseInt(localStorage.getItem('upgradeClickLevel')) || 1;
+let upgradeValueLevel = parseInt(localStorage.getItem('upgradeValueLevel')) || 1;
 const maxUpgradeLevel = 50;
 
 document.getElementById('coins').innerText = coins;
@@ -15,7 +16,8 @@ document.getElementById('clickValue').innerText = clickValue;
 document.getElementById('upgradeCost').innerText = upgradeCost;
 document.getElementById('upgradeValueCost').innerText = upgradeValueCost;
 document.getElementById('clicks').innerText = clicks;
-document.getElementById('upgradeLevel').innerText = upgradeLevel;
+document.getElementById('upgradeClickLevel').innerText = upgradeClickLevel;
+document.getElementById('upgradeValueLevel').innerText = upgradeValueLevel;
 
 function saveState() {
     localStorage.setItem('coins', coins);
@@ -25,11 +27,12 @@ function saveState() {
     localStorage.setItem('upgradeCost', upgradeCost);
     localStorage.setItem('upgradeValueCost', upgradeValueCost);
     localStorage.setItem('clicks', clicks);
-    localStorage.setItem('upgradeLevel', upgradeLevel);
+    localStorage.setItem('upgradeClickLevel', upgradeClickLevel);
+    localStorage.setItem('upgradeValueLevel', upgradeValueLevel);
 }
 
 function upgradeClick() {
-    if (upgradeLevel >= maxUpgradeLevel) {
+    if (upgradeClickLevel >= maxUpgradeLevel) {
         alert("شما به حداکثر سطح ارتقا رسیده‌اید.");
         return;
     }
@@ -39,11 +42,11 @@ function upgradeClick() {
         clickRate++;
         clickLimit++;
         upgradeCost *= 2;
-        upgradeLevel++;
+        upgradeClickLevel++;
         document.getElementById("coins").innerText = coins;
         document.getElementById("clickRate").innerText = clickRate;
         document.getElementById("upgradeCost").innerText = upgradeCost;
-        document.getElementById("upgradeLevel").innerText = upgradeLevel;
+        document.getElementById("upgradeClickLevel").innerText = upgradeClickLevel;
         saveState();
     } else {
         alert("شما به اندازه کافی سکه برای ارتقا ندارید.");
@@ -51,7 +54,7 @@ function upgradeClick() {
 }
 
 function upgradeClickValue() {
-    if (upgradeLevel >= maxUpgradeLevel) {
+    if (upgradeValueLevel >= maxUpgradeLevel) {
         alert("شما به حداکثر سطح ارتقا رسیده‌اید.");
         return;
     }
@@ -60,11 +63,11 @@ function upgradeClickValue() {
         coins -= upgradeValueCost;
         clickValue++;
         upgradeValueCost *= 2;
-        upgradeLevel++;
+        upgradeValueLevel++;
         document.getElementById("coins").innerText = coins;
         document.getElementById("clickValue").innerText = clickValue;
         document.getElementById("upgradeValueCost").innerText = upgradeValueCost;
-        document.getElementById("upgradeLevel").innerText = upgradeLevel;
+        document.getElementById("upgradeValueLevel").innerText = upgradeValueLevel;
         saveState();
     } else {
         alert("شما به اندازه کافی سکه برای ارتقا ندارید.");
